@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>route-demos-parent</artifactId>
+	<version>0.0.1</version>
+	<packaging>pom</packaging>
+
+	<name>route-demos-parent</name>
+	<description>The parent project all Part-2 route demos</description>
+
+  <modules>
+      <module>customer</module>
+      <module>preference</module>
+      <module>recommendation</module>
+  </modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
+    <jib-plugin.version>0.9.11</jib-plugin.version>
+  </properties>
+  
+   <dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring-boot.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+   <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+  </dependencies>
+  
+   <build>
+    <finalName>${artifactId}</finalName>
+	   <pluginManagement>
+      	<plugins>
+		    <plugin>
+			  	<groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+          <executions>
+					  <execution>
+					  	<goals>
+							  <goal>repackage</goal>
+					  	</goals>
+					 </execution>
+				</executions>
+      </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>${jib-plugin.version}</version>
+        <configuration>
+          <to>
+            <image>dev.local/${artifactId}:${version}</image>
+          </to>
+        </configuration>
+      </plugin>
+		 </plugins>
+    </pluginManagement>     
+	</build>
+
+</project>

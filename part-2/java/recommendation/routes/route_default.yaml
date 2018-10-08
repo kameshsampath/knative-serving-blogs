@@ -1,0 +1,8 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Route
+metadata:
+  name: recommendation
+spec:
+  traffic:
+    - configurationName: recommendation
+      percent: 100

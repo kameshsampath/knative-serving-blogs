@@ -3,8 +3,9 @@ kind: Service
 metadata:
   name: greeter
 spec:
-  configuration:
-    revisionTemplate:
-      spec:
-        container:
-          image: dev.local/greeter:0.0.1-SNAPSHOT
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dev.local/greeter:0.0.1-SNAPSHOT

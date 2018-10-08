@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Configuration
+metadata:
+  name: recommendation
+spec:
+  revisionTemplate:
+    metadata:
+      labels:
+        app: recommendation
+    spec:
+      container:
+        image: dev.local/recommendation:0.0.1
