@@ -3,6 +3,7 @@ The repository to hold the sample code that will be referred in the Knative Serv
 
 == Blogs
 * link:./part-1/README.adoc[Deploying your first Serverless Service]
+* link:./part-2/README.adoc[Route to your Serverless Services]
 
 == Running samples locally
 

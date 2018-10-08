@@ -12,18 +12,65 @@ The source folder **part-1** will be referred as `$PROJECT_HOME`. The following 
 
 [source,bash]
 ----
+eval(minishift docker-env) && eval(minishift oc-env) <1>
 cd $PROJECT_HOME/java
-./mvnw jib:dockerBuild # <1>
+# setup project and its sub modules
+./mvnw -N  install
+#customer
+cd $PROJECT_HOME/customer
+./mvnw -DskipTests clean compile jib:dockerBuild # #<2>
+#preferences
+cd $PROJECT_HOME/preferences
+./mvnw -DskipTests clean compile jib:dockerBuild # #<3>
+# Recommendation v1
+cd $PROJECT_HOME/recommendation
+./mvnw -DskipTests clean compile jib:dockerBuild # # <4>
 ----
-<1> this should build a images like `dev.local/customer:0.0.1`,`dev.local/preference:0.0.1`,`dev.local/recommendation:0.0.1`
+<1> Setup Docker and oc cli environment
+<2> This should build a image like `dev.local/customer:0.0.1`
+<3> This should build a image like `dev.local/preference:0.0.1`
+<4> This should build a image like `dev.local/recommendation:0.0.1`
 
 
 === Deploying Service
 
 [source,bash]
 ----
-cd $PROJECT_HOME
+#customer
+cd $PROJECT_HOME/customer
+oc apply -f service.yaml # # <2>
+#preference
+cd $PROJECT_HOME/preference
+oc apply -f service.yaml # # <2>
+# recommendation
+oc apply -f config/configuration_v1.yaml -n myproject # # <3>
+oc apply -f routes/route_default.yaml -n myproject # #<4>
 ----
+<1> Deploy customer service
+<2> Deploy preferences service
+<3> Deploy recommendation service configuration
+<4> Deploy recommendation service route
+
+=== Calling the service
+
+[source,bash]
+----
+cd $PROJECT_HOME/bin/call.sh
+----
+
+=== Scaling down to zero
+
+[source,bash]
+----
+kubectl -n knative-serving get cm config-autoscaler -o yaml | yq w -  data.scale-to-zero-threshold 1m | kubectl apply -f -  # #<1>
+kubectl -n knative-serving get cm config-autoscaler -o yaml | yq w -  data.scale-to-zero-grace-period 30s | kubectl apply -f - # #<2>
+----
+
+<1> Time between last request and scaling down to zero
+
+<2> Time after which the inactive revision starts to scale down to zero
+
+NOTE: This command makes use of a command line based YAML editing tool called http://mikefarah.github.io/yq/[yq]
 
 == Useful commands
 
