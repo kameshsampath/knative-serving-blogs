@@ -8,5 +8,9 @@ spec:
       labels:
         app: greeter
     spec:
+      buildRef:
+        apiVersion: build.knative.dev/v1alpha1
+        kind: Build
+        name: greeter-fmp-build
       container:
         image: dev.local/greeter:0.0.1

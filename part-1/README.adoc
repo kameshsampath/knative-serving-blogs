@@ -32,7 +32,7 @@ docker build -t dev.local/greeter:0.0.1-SNAPSHOT --rm . # <1>
 [source,bash]
 ----
 cd $PROJECT_HOME
-kubectl -f service.yaml
+kubectl apply -f service.yaml
 ----
 
 == Useful commands

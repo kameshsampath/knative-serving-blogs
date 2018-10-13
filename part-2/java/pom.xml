@@ -14,7 +14,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
     <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
-    <jib-plugin.version>0.9.11</jib-plugin.version>
   </properties>
   
    <dependencyManagement>
@@ -59,16 +58,6 @@
 					  	</goals>
 					 </execution>
 				</executions>
-      </plugin>
-      <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
-        <version>${jib-plugin.version}</version>
-        <configuration>
-          <to>
-            <image>dev.local/${artifactId}:${version}</image>
-          </to>
-        </configuration>
       </plugin>
 		</plugins>
 	</build>

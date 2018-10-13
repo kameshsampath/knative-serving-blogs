@@ -1,0 +1,35 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: BuildTemplate
+metadata:
+  name: fmp-s2i
+spec:
+  parameters:
+    - name: IMAGE_NAME
+      description: The name of the image to build and push, you can use %a for artifact id from pom.xml and %v for version from pom.xml and %g for group from pom.xml
+      default: "dev.local/%a:%v"
+    - name: CONTEXT_DIR
+      description: The directory containing the app, relative to the source repository root
+      default: .
+    - name: CACHE
+      description: The name of the volume for caching Maven artifacts
+      default: empty-dir-volume
+    - name: FMP_VERSION
+      description: The name of the fabric8 maven plugin to use 
+      default: 3.5.41
+
+  steps:
+    - name: build-and-push
+      image: gcr.io/cloud-builders/mvn
+      args:
+        - clean
+        - package
+        - io.fabric8:fabric8-maven-plugin:${FMP_VERSION}:build
+        - -Duser.home=/builder/home
+      workingDir: /workspace/${CONTEXT_DIR}
+      volumeMounts:
+        - name: ${CACHE}
+          mountPath: /builder/home/.m2
+          subPath: m2-cache
+  volumes:
+    - name: empty-dir-volume
+      emptyDir: {}
