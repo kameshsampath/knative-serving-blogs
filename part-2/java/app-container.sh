@@ -17,6 +17,6 @@ chmod +x $javamnt/deployment/app.jar
 buildah config --workingdir /deployment $javacontainer
 buildah config --cmd app.jar $javacontainer
 
-buildah commit $javacontainer docker://localhost:5000/$IMAGE_NAME
+buildah commit $javacontainer $IMAGE_NAME
 
-# buildah push $IMAGE_NAME
+buildah push $IMAGE_NAME
