@@ -17,12 +17,12 @@ chmod +x $javamnt/deployment/app.jar
 buildah config --workingdir /deployment $javacontainer
 buildah config --cmd app.jar $javacontainer
 
-buildah commit  $javacontainer $IMAGE_NAME
+imageID=$(buildah commit $javacontainer $IMAGE_NAME)
 
 # Push the image back to local default docker registry
 # you can also push to external registry 
 # Refer to https://github.com/containers/buildah/blob/master/docs/buildah-push.md
 buildah push --cert-dir=/var/run/secrets/kubernetes.io \
   --creds=openshift:$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
-  $javacontainer \
-  docker://docker-registry.default.svc.cluster.local:5000/$IMAGE_NAME
+   $imageID \
+   docker://docker-registry.default.svc.cluster.local:5000/$IMAGE_NAME
