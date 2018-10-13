@@ -19,4 +19,5 @@ buildah config --cmd app.jar $javacontainer
 
 buildah commit  $javacontainer $IMAGE_NAME
 
-buildah push $IMAGE_NAME
+# Enable this if you are pushing to external registries
+# buildah push $IMAGE_NAME
