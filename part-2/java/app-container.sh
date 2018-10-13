@@ -19,4 +19,4 @@ buildah config --cmd app.jar $javacontainer
 
 buildah commit $javacontainer $IMAGE_NAME
 
-# build push $IMAGE_NAME
+buildah push $IMAGE_NAME
