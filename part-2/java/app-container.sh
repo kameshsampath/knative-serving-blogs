@@ -24,4 +24,4 @@ buildah commit  $javacontainer $IMAGE_NAME
 # Refer to https://github.com/containers/buildah/blob/master/docs/buildah-push.md
 buildah push --cert-dir=/var/run/secrets/kubernetes.io \
   --creds=openshift:$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
-  docker://docker-registry.default.svc.cluster.local:5000/$IMAGE_NAME
+  docker-registry.default.svc.cluster.local:5000/$IMAGE_NAME
