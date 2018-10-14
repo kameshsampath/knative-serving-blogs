@@ -33,4 +33,4 @@ imageID=$(buildah commit $javacontainer $IMAGE_NAME)
 buildah push --tls-verify=false \
   --creds=openshift:$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) \
    $imageID \
-   docker://docker-registry.default.svc.cluster.local:5000/$POD_NAMESPACE/$IMAGE_NAME
+   docker://docker-registry.default.svc:5000/$POD_NAMESPACE/$IMAGE_NAME
