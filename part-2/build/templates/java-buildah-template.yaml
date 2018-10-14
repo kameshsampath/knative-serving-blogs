@@ -23,7 +23,7 @@ spec:
       default: empty-dir-volume
     - name: BUILDAH_SCRIPT
       description: The name of buildah script that will be used to build OCI container
-      default: app-container.sh
+      default: buildah.sh
 
   steps:
     - name: build-app
@@ -48,6 +48,10 @@ spec:
         value: "${IMAGE_NAME}"
       - name: JAVA_APP_NAME
         value: "${JAVA_APP_NAME}"
+      - name: POD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
 
   volumes:
     - name: empty-dir-volume
