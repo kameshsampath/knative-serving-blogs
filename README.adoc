@@ -2,12 +2,14 @@
 The repository to hold the sample code that will be referred in the Knative Serving blog series.
 
 == Blogs
-* link:./part-1/README.adoc[Deploying your first Serverless Service]
+
+=== Part - 1
+
+* Blog: https://blog.openshift.com/knative-serving-your-serverless-services/[Deploying your first Serverless Service]
+* Sources : link:./part-1/README.adoc[Deploying your first Serverless Service]
 
 == Running samples locally
 
 All the samples in this blog will be run using https://github.com/minishift/minishift[minishift], the single node https://www.okd.io/[OKD] cluster that can be used for development purposes. 
-
-== Minishift setup
 
 To setup Knative components (serving, build etc.,) follow the instructions from https://github.com/redhat-developer-demos/knative-minishift/blob/master/README.adoc[here]
