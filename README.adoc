@@ -10,4 +10,4 @@ All the samples in this blog will be run using https://github.com/minishift/mini
 
 == Minishift setup
 
-To setup Knative components (serving, build etc.,) follow the instructions from https://github.com/redhat-developer-demos/knative-minishift/blob/master/README.adoc[here 
+To setup Knative components (serving, build etc.,) follow the instructions from https://github.com/redhat-developer-demos/knative-minishift/blob/master/README.adoc[here]
