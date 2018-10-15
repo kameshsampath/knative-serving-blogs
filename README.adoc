@@ -1,2 +1,3 @@
 = Knative Serving Blogs
+
 This repository has been relocated to https://github.com/workspace7/knative-serving-blogs
